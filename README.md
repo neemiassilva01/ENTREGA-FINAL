@@ -1,3 +1,12 @@
+*INTEGRANTES:*
+
+Késia Silva
+Marcos Angelo
+Mateus Vasconcelos
+Miguel Boscolo
+Neemias Silva
+
+
 # TechStock - Arquitetura Inicial (AWS)
 
 ## 📌 Contexto
