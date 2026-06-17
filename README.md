@@ -1,9 +1,9 @@
 *INTEGRANTES:*
 
-Késia Silva
-Marcos Angelo
-Mateus Vasconcelos
-Miguel Boscolo
+Késia Silva,
+Marcos Angelo,
+Mateus Vasconcelos,
+Miguel Boscolo e
 Neemias Silva
 
 
