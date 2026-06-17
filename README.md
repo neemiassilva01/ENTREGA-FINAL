@@ -1,4 +1,4 @@
-*INTEGRANTES:*
+**INTEGRANTES:**
 
 Késia Silva,
 Marcos Angelo,
@@ -51,3 +51,5 @@ Esta entrega parcial (17/06/2026) contempla a **arquitetura inicial com monitora
 
 ## 📊 Total Estimado
 **~US$ 110–120/mês**
+
+**Arquivo em PDF dos custos iniciais: https://github.com/neemiassilva01/ENTREGA-FINAL/blob/main/My%20Estimate%20-%20Calculadora%20de%20Pre%C3%A7os%20da%20AWS.pdf**
