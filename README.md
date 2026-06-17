@@ -30,12 +30,15 @@ Esta entrega parcial (17/06/2026) contempla a **arquitetura inicial com monitora
 
 | Serviço | Tipo | Estimativa Mensal |
 | --- | --- | --- |
-| **[EC2 Frontend](ca://s?q=AWS_EC2_costs)** | t3.small | ~US$ 16 |
-| **[EC2 Backend](ca://s?q=AWS_EC2_costs)** | t3.small | ~US$ 16 |
-| **[EC2 Prometheus/Grafana](ca://s?q=AWS_EC2_costs)** | t3.small | ~US$ 16 |
-| **[Application Load Balancer](ca://s?q=AWS_ALB_costs)** | ALB | ~US$ 18 |
-| **[EBS Storage](ca://s?q=AWS_EBS_costs)** | 50GB | ~US$ 10 |
-| **[Data Transfer](ca://s?q=AWS_data_transfer_costs)** | 2 GB/mês | ~US$ 15 |
-| **[VPC Gateway Load Balancer](ca://s?q=AWS_Gateway_Load_Balancer_costs)** | 1 endpoint | ~US$ 20 |
+| **[EC2 Frontend](ca://s?q=AWS_EC2_costs)** | t3.small + 10GB EBS | ~US$ 17,79 |
+| **[EC2 Backend](ca://s?q=AWS_EC2_costs)** | t3.small + 10GB EBS | ~US$ 17,79 |
+| **[EC2 Monitoramento (Prometheus/Grafana)](ca://s?q=AWS_EC2_costs)** | t3.small + 10GB EBS | ~US$ 17,79 |
+| **[Application Load Balancer](ca://s?q=AWS_ALB_costs)** | ALB | ~US$ 20–25 |
+| **[NAT Gateway](ca://s?q=NAT_Gateway_em_AWS)** | 1 gateway + 10GB processados | ~US$ 33–36 |
+| **[EBS Storage](ca://s?q=AWS_EBS_costs)** | 30GB (10GB × 3 instâncias) | ~US$ 3 |
+| **[Data Transfer](ca://s?q=AWS_data_transfer_costs)** | estimado (tráfego leve) | ~US$ 5 |
 
-**Total aproximado: ~US$ 143/mês**
+---
+
+## 📊 Total Estimado
+**~US$ 110–120/mês**
