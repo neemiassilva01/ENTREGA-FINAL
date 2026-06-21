@@ -1,12 +1,16 @@
-# 📦 TechStock — Guia de Implantação Multi-Cloud (AWS + Azure)
+# 📦 TechStock — Implantação Multi-Cloud (AWS + Azure)
 
 ## 🖼️ Arquitetura Inicial
 *(arquitetura inicial abaixo)*
+
+https://github.com/neemiassilva01/ENTREGA-FINAL/blob/main/Arquitetura%20Inicial%20AWS.jpg
 
 ---
 
 ## 🖼️ Arquitetura Final
 *(arquitetura final abaixo)*
+
+https://github.com/neemiassilva01/ENTREGA-FINAL/blob/main/Arquitetura%20Final%20AWS%20%2B%20Azure.jpg
 
 ---
 
@@ -66,12 +70,7 @@
 7. Conectar **Power BI** ao RDS via VPN.  
 8. Validar **ALB + regras de roteamento**.  
 
+
+
 ---
-
-## 🔧 Troubleshooting Rápido
-- **Frontend sem dados** → verificar `config.js` com URL correta do ALB.  
-- **Prometheus DOWN** → liberar portas 3000 e 9100 no SG do Backend.  
-- **Grafana sem datasource** → recriar com UID fixo `PBFA97CFB590B2093`.  
-- **API retornando HTML** → checar prioridade das regras no ALB.  
-
 ---
