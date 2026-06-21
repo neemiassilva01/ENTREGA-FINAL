@@ -1,73 +1,77 @@
-# 📦 TechStock — Multi-Cloud Deployment Guide
+# 📦 TechStock — Guia de Implantação Multi-Cloud (AWS + Azure)
 
-## 🌐 Contexto de Negócio
-A **Honey Badger (Alpha Tech Group)** utiliza o sistema **TechStock** para gestão de estoque.  
-- Atualmente: **AWS (IaaS + PaaS)**  
-- BI: contratou **Azure Power BI** sem alinhamento com TI  
-- Infraestrutura: moveu **Grafana + Prometheus** para **Azure**, centralizando observabilidade, relatórios e backup  
-- TechStock encerrou operações, deixando apenas o repositório disponível  
+## 🖼️ Arquitetura Inicial
+*(arquitetura inicial abaixo)*
 
 ---
 
-## 🎯 Desafios
-- [Migrar frontend para S3](ca://s?q=Migrar_frontend_para_S3) e integrar com backend  
-- [Criar VPN Site-to-Site](ca://s?q=Criar_VPN_Site_To_Site_AWS_Azure) entre AWS e Azure sem exposição pública  
-- [Migrar monitoramento para Azure](ca://s?q=Migrar_monitoramento_para_Azure)  
-- [Conectar Power BI ao RDS](ca://s?q=Conectar_Power_BI_ao_RDS)  
-- [Criar infraestrutura IaC](ca://s?q=Criar_infraestrutura_IaC_multi_cloud)  
+## 🖼️ Arquitetura Final
+*(arquitetura final abaixo)*
 
 ---
 
 ## 🏗️ Arquitetura Multi-Cloud
 
-### AWS (us-east-1)
-- **S3 + CloudFront** → Frontend  
-- **ALB**  
-  - `/api/*` → Backend  
-  - `/grafana/*` → Azure  
-  - `/prometheus/*` → Azure  
-  - `/*` → Frontend  
-- **EC2 Backend** (Node.js :3000)  
-- **RDS PostgreSQL** (privado, porta 5432)  
-- **VPC** com subnets públicas e privadas  
+### AWS (Core da Aplicação)
+- **Frontend**: migrado para **S3 + CloudFront** (HTML, CSS, JS).
+- **Backend**: **EC2 Amazon Linux** rodando TechStock API (Node.js + Nginx).
+- **Banco de Dados**: **Amazon RDS PostgreSQL**.
+- **Gestão de Segredos**: **AWS Secrets Manager** para credenciais e certificados.
+- **Balanceamento**: **Application Load Balancer (ALB)** distribuindo tráfego.
+- **Rede Segura**: VPC privada com NAT Gateway e VPN Site-to-Site.
 
-### Azure
-- **Grafana + Prometheus** (AKS ou App Service)  
-- **Azure Monitor + Log Analytics**  
-- **Power BI** conectado ao RDS via VPN  
-- **Backup** em Blob Storage  
-
-### VPN Site-to-Site
-- **AWS Virtual Private Gateway**  
-- **Azure VPN Gateway**  
+### Azure (Observabilidade + BI)
+- **Monitoramento**: **Grafana + Prometheus** em VM Linux.
+- **Business Intelligence**: **Power BI** conectado ao RDS via VPN.
+- **Backup e relatórios**: centralizados na Azure.
+- **VPN Gateway**: integração segura com AWS.
 
 ---
 
-## 🔑 Componentes Principais
-- **[Frontend no S3](ca://s?q=Frontend_no_S3)** — Deploy estático em S3 + CloudFront  
-- **[Backend no EC2 + RDS](ca://s?q=Backend_no_RDS_e_EC2)** — Node.js em EC2 privado + PostgreSQL isolado  
-- **[Monitoramento na Azure](ca://s?q=Monitoramento_na_Azure)** — Grafana + Prometheus migrados  
-- **[VPN Site-to-Site](ca://s?q=VPN_Site_to_Site_AWS_Azure)** — IPSec entre AWS e Azure  
-- **[Power BI conectado ao RDS](ca://s?q=Power_BI_conectado_ao_RDS)** — Azure Data Gateway + dashboards  
-- **[Infraestrutura IaC](ca://s?q=Infraestrutura_IaC_multi_cloud)** — Terraform multi-cloud + CI/CD  
+## 📊 Custos Estimados
+
+| Serviço | AWS | Azure |
+|---------|-----|-------|
+| **Frontend** | S3 + CloudFront: USD 5–10/mês | — |
+| **Backend** | EC2 t3.medium: USD 35–40/mês | — |
+| **Banco de Dados** | RDS PostgreSQL db.t3.medium: USD 60–70/mês | — |
+| **Gestão de Segredos** | Secrets Manager: USD 5–10/mês | Key Vault: USD 5–10/mês |
+| **Balanceamento** | ALB: USD 18–20/mês | — |
+| **Rede Segura** | NAT + VPN: USD 25–30/mês | VPN Gateway: USD 25–30/mês |
+| **Monitoramento** | — | VM Linux (Grafana + Prometheus): USD 40–50/mês |
+| **BI** | — | Power BI Pro: USD 10/usuário/mês |
+
+**Total AWS**: ~USD 150–170/mês  
+**Total Azure**: ~USD 100–120/mês  
+**Custo combinado**: ~USD 250–300/mês
 
 ---
 
-## ⚠️ Ajustes Críticos
-- Ordem das regras no ALB: `/api* → /grafana* → /prometheus* → /*`  
-- Security Groups: liberar portas 3000 e 9100 do backend para o SG do monitoring  
-- Datasource Grafana: UID fixo `PBFA97CFB590B2093`  
-- `config.js`: regenerar sempre que o ALB mudar  
-- Power BI: acesso ao RDS apenas via VPN  
+## 🎯 Benefícios da Arquitetura Final
+- **Segurança reforçada**: comunicação via VPN Site-to-Site sem exposição pública.  
+- **Custo otimizado**: frontend barato no S3, monitoramento consolidado na Azure.  
+- **Governança**: credenciais centralizadas no Secrets Manager.  
+- **Escalabilidade**: ALB e RDS permitem crescimento controlado.  
+- **Flexibilidade**: BI acessa dados do RDS sem duplicação.  
 
 ---
 
-## 📋 Checklist de Implantação
-- [ ] VPC com subnets pública e privada  
-- [ ] RDS PostgreSQL provisionado  
-- [ ] Backend em EC2 com API funcional  
-- [ ] Frontend migrado para S3 + CloudFront  
-- [ ] Monitoramento migrado para Azure  
-- [ ] VPN Site-to-Site configurada  
-- [ ] Power BI conectado ao RDS  
-- [ ] Terraform IaC versionado e aplicado  
+## 📋 Ordem de Execução
+1. Criar **VPC** com subnets públicas e privadas.  
+2. Provisionar **RDS PostgreSQL**.  
+3. Configurar **EC2 Backend** com API TechStock.  
+4. Migrar **Frontend** para S3 + CloudFront.  
+5. Configurar **VPN Site-to-Site** entre AWS e Azure.  
+6. Migrar **Monitoramento** para Azure (Grafana + Prometheus).  
+7. Conectar **Power BI** ao RDS via VPN.  
+8. Validar **ALB + regras de roteamento**.  
+
+---
+
+## 🔧 Troubleshooting Rápido
+- **Frontend sem dados** → verificar `config.js` com URL correta do ALB.  
+- **Prometheus DOWN** → liberar portas 3000 e 9100 no SG do Backend.  
+- **Grafana sem datasource** → recriar com UID fixo `PBFA97CFB590B2093`.  
+- **API retornando HTML** → checar prioridade das regras no ALB.  
+
+---
