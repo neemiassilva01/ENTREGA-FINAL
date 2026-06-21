@@ -55,3 +55,5 @@ Esta entrega parcial (17/06/2026) contempla a **arquitetura inicial com monitora
 **Arquivo em PDF dos custos iniciais: https://github.com/neemiassilva01/ENTREGA-FINAL/blob/main/My%20Estimate%20-%20Calculadora%20de%20Pre%C3%A7os%20da%20AWS.pdf**
 
 **TOPOLOGIA INICIAL:**
+
+https://github.com/neemiassilva01/ENTREGA-FINAL/blob/main/Arquitetura%20Inicial%20AWS.jpg
