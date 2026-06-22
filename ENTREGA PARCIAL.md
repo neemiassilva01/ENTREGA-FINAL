@@ -7,7 +7,7 @@ Miguel Boscolo e
 Neemias Silva
 
 
-# TechStock - Arquitetura Inicial (AWS)
+# TechStock - Arquitetura Inicial (17/06/2026) (AWS)
 
 ## 📌 Contexto
 A empresa Honey Badger utiliza o sistema de gestão de estoque **TechStock** hospedado na **AWS (us-east-1)**.  
